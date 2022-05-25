@@ -24,4 +24,48 @@ UserId
 Country
 </td>
 <td>
+Start Date
+</td>
+<td>
+End Date
+</td>
+<td>
+Visa Type
+</td>
+<td>
+Add status
+</td>
+</tr>
+<%
+while (rs.next()) {
+%>
+<TR>
+<TD><%=rs.getString(1)%></TD>
+<TD><%=rs.getString(2)%></TD>
+<TD><%=rs.getString(3)%></TD>
+<TD><%=rs.getString(4)%></TD>
+<TD><%=rs.getString(5)%></TD>
+<TD><a href="staus.jsp">Add</TD>
+</TR>
+<% } %>
+<%
+// close all the connections.
+rs.close();
+statement.close();
+connection.close();
+} catch (Exception ex) {
+%>
+<font size="+3" color="red"></b>
+<%
+out.println("Unable to connect to database.");
+}
+%>
+</TABLE><TABLE>
+<TR>
+<TD>
+</TD>
+</TR>
+</TABLE>
+</body>
+</html>
 
