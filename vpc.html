@@ -1,0 +1,250 @@
+//Login.jsp
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>visa</title>
+</head>
+<body background="images/v (1).png">
+<form method="post" action="logcode.jsp">
+<table cellpadding="4" cellspacing="2"  width="50%" border="10px" align="center"   style="font-color:seagreen; background-color:lightyellow"; font-size:25px; blue;border-style:ridge;border-color:#eeacfb;">
+       <tr>
+        <td align="center"><h1>Login</h1></td>
+         </tr>
+    <hr size="15" color="black"/>
+<br>
+<table cellpadding="4" cellspacing="2"  width="50%" border="10px" align="center"   style="font-color:seagreen; background-color:pink"; font-size:25px; blue;border-style:ridge;border-color:#eeacfb;">
+<tr>
+<td align="center">UserId</td>
+<td><input type="text" name="Id"/></td>
+</tr>
+<tr>
+<td align="center">Password </td>
+<td><input type="password" name="password"/></td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<input type="submit" value="Submit" />
+<input type="reset" value="Reset"/>
+</td>
+</tr>
+<a href="register.jsp">NEW USER</A>
+</table>
+</form>
+</body>
+</html>
+
+//Admin.jsp
+<%@ page import ="java.sql.*" %>
+<%
+    String username  = request.getParameter("username");    
+    String password = request.getParameter("password");
+    Class.forName("com.mysql.jdbc.Driver");
+Connectioncon=DriverManager.getConnection("jdbc:mysql://localhost:3306/visa",
+            "root", "root");
+    Statement st = con.createStatement();
+    ResultSet rs;
+    rs = st.executeQuery("select * from admin where username='" + username+ "' and password='" + password+ "'");
+    if (rs.next()) 
+{
+        session.setAttribute("username",username);
+        //out.println("welcome " + userid);
+        //out.println("<a href='logout.jsp'>Log out</a>");
+        response.sendRedirect("adminhome.jsp");
+    } else {
+        out.println("Invalid password <a href='adminlog.jsp'>try again</a>");
+    }
+%>
+
+// adminlog.jsp
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>visa</title>
+
+</head>
+<body background="images/1.jpg">
+<form method="post" action="adminc.jsp">
+
+<table cellpadding="4" cellspacing="2"  width="50%" border="10px" align="center"   style="font-color:seagreen; background-color:lightyellow"; font-size:25px; blue;border-style:ridge;border-color:#eeacfb;">
+       <tr>
+        <td align="center"><h1>Admin Login</h1></td>
+          </tr>
+    <hr size="15" color="black"/>
+<br>
+<table cellpadding="4" cellspacing="2"  width="50%" border="10px" align="center"   style="font-color:seagreen; background-color:pink"; font-size:25px; blue;border-style:ridge;border-color:#eeacfb;">
+<tr>
+                        <td><center>UserName</center></td>
+                        <td><input type="text" name="username" /></td>
+                    </tr>
+                    <tr>
+                        <td><center>Password</center></td>
+                        <td><input type="password" name="password"  /></td>
+                    </tr>
+             <tr>
+<td colspan="2" align="center">
+<input type="submit" value="Submit" />
+<input type="reset" value="Reset"/>
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+//Register.jsp
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>visa</title>
+</head>
+<body background="images/v (5).jpg">
+<form method="post" action="code.jsp">
+<table cellpadding="4" cellspacing="2"  width="50%" border="10px" align="center"   style="font-color:seagreen; background-color:lightgreen"; font-size:25px; blue;border-style:ridge;border-color:#eeacfb;">
+       <tr>
+        <td align="center"><h1>User Register</h1></td>     
+    </tr>
+    <hr size="15" color="black"/>
+<br>
+<table cellpadding="4" cellspacing="2"  width="50%" border="10px" align="center"   style="font-color:seagreen; background-color:lightyellow"; font-size:25px; blue;border-style:ridge;border-color:#eeacfb;">
+<tr>
+<td align="center">UserId</td>
+<td><input type="text" name="id" placeholder="Required UserId" onkeypress="return event.charCode >=48 && event.charCode <=57" onpast="return false"
+/></td>
+</tr>
+<tr>
+<td align="center">Password</td>
+<td><input type="password" name="password" placeholder="Required Pass"/></td>
+</tr>
+<tr>
+<td align="center">Fname</td>
+<td><input type="text" name="fname" placeholder="Required Fname" onkeypress="return event.charCode >=89 && event.charCode <=121" onpast="return false"/></td>
+</tr>
+<tr>
+<td align="center">Lname</td>
+<td><input type="text" name="lname"  placeholder="Required Lname" onkeypress="return event.charCode >=89 && event.charCode <=121" onpast="return false"/></td>
+</tr>
+<tr>
+<td align="center">Contact</td>
+<td><input type="text" name="contact" placeholder="Required number" onkeypress="return event.charCode >=48 && event.charCode <=57" onpast="return false"/></td>
+</tr>
+<tr>
+<td align="center">EmailID</td>
+<td><input type="email" name="emailid" placeholder="Required Emailid"/></td>
+</tr>
+<tr>
+<td align="center">Address</td>
+<td><input type="text" name="address" placeholder="Required Address"/></td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<input type="submit" value="Submit" />
+<input type="reset" value="Reset"/>
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+
+//Applicationview.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.sql.*" %>
+<%@ page import="java.io.*" %> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>VISA</title>
+ <link href="css/templatemo_style.css" rel="stylesheet" type="text/css" />
+</head>
+<body bgcolor="lightgreen">
+<div id="templatemo_wrapper">
+               <!-- end of header -->
+               <!-- end of templatemo_menu -->
+    </div>
+    <table cellpadding="10" border="5" width="100%"  align="center" bgcolor="yellow" style="font-weight:bolder; color:red; font-size:35px;">        
+<tr>
+    <td align="center">
+Visa Apply Details 
+</td>
+</tr>
+</table> 
+    <a href="adminhome.jsp"> HOME</a>
+    <hr size="10" color="gray" >
+  <%
+try {
+String connectionURL = "jdbc:mysql://localhost:3306/visa";
+Connection connection = null;
+Statement statement = null;
+ResultSet rs = null;
+Class.forName("com.mysql.jdbc.Driver").newInstance();
+connection = DriverManager.getConnection(connectionURL, "root", "root");
+statement = connection.createStatement();
+String QueryString = "SELECT * from  Apply";
+rs = statement.executeQuery(QueryString);
+%>
+<TABLE cellpadding="15" border="6"  bgcolor="green">
+<tr bgcolor="yellow">
+<td>
+UserId
+</td>
+<td>
+Country
+</td>
+<td>
+Start Date
+</td>
+<td>
+End Date
+</td>
+<td>
+Visa Type
+</td>
+<td>
+Add status
+</td>
+</tr>
+<%
+while (rs.next()) {
+%>
+<TR>
+<TD><%=rs.getString(1)%></TD>
+<TD><%=rs.getString(2)%></TD>
+<TD><%=rs.getString(3)%></TD>
+<TD><%=rs.getString(4)%></TD>
+<TD><%=rs.getString(5)%></TD>
+<TD><a href="staus.jsp">Add</TD>
+</TR>
+<% } %>
+<%
+// close all the connections.
+rs.close();
+statement.close();
+connection.close();
+} catch (Exception ex) {
+%>
+<font size="+3" color="red"></b>
+<%
+out.println("Unable to connect to database.");
+}
+%>
+</TABLE><TABLE>
+<TR>
+<TD>
+</TD>
+</TR>
+</TABLE>
+</body>
+</html>
+
+
+
+
+
