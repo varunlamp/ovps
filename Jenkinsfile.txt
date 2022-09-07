@@ -2,12 +2,8 @@ pipeline {
     agent any
     tools { 
         maven 'maven' 
-
-    }
-   
-   
-         stages {
-        
+   }
+    stages {
           stage ('compile') {
             steps {
                 sh "mvn compile" 
@@ -28,6 +24,5 @@ pipeline {
                 sh "mvn install" 
             }
          }
-    
     }
 }
